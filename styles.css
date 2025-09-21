@@ -3,7 +3,12 @@ body {
   font-family: "Montserrat", sans-serif;
 }
 .page-header {
-  background-image: url("./image.jpeg");
+  background: linear-gradient(
+      to top,
+      rgba(10, 25, 47, 0.9),
+      rgba(32, 56, 100, 0.6)
+    ),
+    url("./headerImage.jpeg");
   background-size: cover;
   background-position: center;
   height: 30em;
@@ -11,40 +16,92 @@ body {
   color: #fff;
 }
 
+.page-header h3 {
+  opacity: 0;
+  animation: fadeIn 1s ease forwards;
+}
+
+@keyframes fadeIn {
+  to {
+    opacity: 1;
+  }
+}
+
 .container {
-  padding-top: 20vh;
+  padding-top: 10vh;
 }
 
 .photo-container > img {
-  width: 125%;
+  width: 100%;
 }
 
 .photo-container {
-  width: 123px;
-  height: 123px;
+  width: 200px;
+  height: 200px;
   border-radius: 50%;
   overflow: hidden;
   box-shadow: 0 10px 50px 0 rgba(0, 0, 0, 0.3);
   margin: auto;
+  border: 2px solid #3f51b5;
 }
 
 .title {
   font-weight: 700;
   margin-top: 20px;
   padding-top: 30px;
-  font-size: 1.825em;
+  font-size: 2.75em;
   text-align: center;
 }
 
 .category {
   text-align: center;
   color: hsla(0, 0%, 100%, 0.8);
-  font-weight: 700;
-  text-transform: uppercase;
+  font-weight: 400;
+  font-size: 1.5em;
+  margin-top: 8px;
 }
 
 .section {
   color: #2c2c2c;
+}
+
+.about {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.about-text {
+  display: flex;
+  flex-direction: column;
+}
+
+.skill-block {
+  max-width: 300px;
+  width: 100%;
+  height: auto;
+}
+
+.description {
+  display: flex;
+  color: #9a9a9a;
+  text-align: center;
+  max-width: 700px;
+  line-height: 1.4em;
+  font-size: 1.3em;
+}
+
+.highlights {
+  color: #9a9a9a;
+  font-weight: 300;
+  font-size: 1.1em;
+  margin-top: 8px;
+  text-align: center;
+}
+
+span:hover {
+  transform: scale(1.1);
 }
 
 .button-container {
@@ -52,12 +109,8 @@ body {
   text-align: center;
 }
 
-h5 {
-  color: #9a9a9a;
-  text-align: center;
-  max-width: 700px;
-  margin: 20px auto 75px;
-  line-height: 1.4em;
+.button-container button:hover {
+  transform: scale(1.1);
 }
 
 .grid-container {
@@ -67,37 +120,52 @@ h5 {
   margin: 2px;
 }
 
-.box > img {
+.box {
+  width: 450px;
+  height: auto;
+  margin: 10px;
+  box-shadow: 0 10px 10px rgba(0, 0, 0, 0.3);
+  position: relative;
+}
+
+.box > p {
+  padding: 10px;
+}
+
+.box-image {
+  width: 100%;
+  height: 250px;
+}
+
+.box-image > img {
   width: 100%;
   height: 100%;
 }
 
-.box {
-  width: 450px;
-  height: 250px;
-  margin: 10px;
-  box-shadow: 0 10px 10px rgba(0, 0, 0, 0.3);
-  position: relative;
-  background: rgba(0, 0, 0, 0.5);
+.stack > i {
+  font-size: 40px;
+  margin-right: 10px;
 }
 
-.box > img:hover {
-  opacity: 0.25;
-}
-
-.box-btn-container:hover {
-  opacity: 1;
-}
-
-.box-btn-container:hover + img {
-  opacity: 0.25;
-}
-
-.box-btn-container {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+.fade-in-section {
   opacity: 0;
-  z-index: 1;
+  transform: translateY(20px);
+  transition: opacity 1s ease-out, transform 1s ease-out;
+}
+
+.fade-in-section.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media screen and (max-width: 768px) {
+  .about {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .skill-block {
+    max-width: 80%;
+    margin: 0 auto 20px auto;
+  }
 }
