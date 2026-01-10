@@ -3,160 +3,816 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tarekul Islam – Full Stack Engineer</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
       rel="stylesheet"
-      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
-      integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z"
-      crossorigin="anonymous"
-    />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200;300&display=swap"
-      rel="stylesheet"
-    />
-    <link rel="stylesheet" href="styles.css" />
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css"
     />
 
-    <title>Portfolio</title>
+    <style>
+      :root {
+        /* Modern Color Palette */
+        --bg: #f8fafc;
+        --card: #ffffff;
+        --text-main: #0f172a;
+        --text-muted: #64748b;
+        --primary: #2563eb;
+        --primary-hover: #1d4ed8;
+        --border: #e2e8f0;
+        --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+        --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1),
+          0 2px 4px -2px rgb(0 0 0 / 0.1);
+        --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1),
+          0 4px 6px -4px rgb(0 0 0 / 0.1);
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        font-family: "Inter", sans-serif;
+        background-color: var(--bg);
+        background-image: radial-gradient(
+            at 0% 0%,
+            hsla(253, 16%, 7%, 0) 0,
+            hsla(253, 16%, 7%, 0) 50%
+          ),
+          radial-gradient(
+            at 50% 0%,
+            hsla(225, 39%, 30%, 0.03) 0,
+            hsla(225, 39%, 30%, 0) 50%
+          ),
+          radial-gradient(
+            at 100% 0%,
+            hsla(339, 49%, 30%, 0) 0,
+            hsla(339, 49%, 30%, 0) 50%
+          );
+        color: var(--text-main);
+        line-height: 1.6;
+        -webkit-font-smoothing: antialiased;
+      }
+
+      .container {
+        max-width: 900px;
+        margin: 0 auto;
+        padding: 80px 24px;
+      }
+
+      /* ---------- HERO ---------- */
+
+      .hero {
+        text-align: center;
+        margin-bottom: 80px;
+        animation: fadeIn 0.8s ease-out;
+      }
+
+      .avatar {
+        width: 120px;
+        height: 120px;
+        border-radius: 50%;
+        margin-bottom: 24px;
+        object-fit: cover;
+        border: 4px solid var(--card);
+        box-shadow: var(--shadow-lg);
+        transition: transform 0.3s ease;
+      }
+
+      .avatar:hover {
+        transform: scale(1.05);
+      }
+
+      h1 {
+        font-size: 48px;
+        margin: 0;
+        font-weight: 800;
+        letter-spacing: -1.5px;
+        background: linear-gradient(to right, #0f172a, #334155);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+
+      .title {
+        font-size: 20px;
+        color: var(--primary);
+        margin-top: 12px;
+        font-weight: 600;
+      }
+
+      .summary {
+        max-width: 600px;
+        margin: 24px auto 0;
+        color: var(--text-muted);
+        font-size: 18px;
+      }
+
+      /* ---------- SECTIONS GENERAL ---------- */
+
+      section {
+        margin-bottom: 96px;
+      }
+
+      section h2 {
+        font-size: 28px;
+        margin-bottom: 32px;
+        letter-spacing: -0.5px;
+        color: var(--text-main);
+        display: flex;
+        align-items: center;
+        gap: 12px;
+      }
+
+      /* ---------- SKILLS ---------- */
+
+      .skills {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        justify-content: center;
+      }
+
+      .skill {
+        background: var(--card);
+        border: 1px solid var(--border);
+        padding: 8px 16px;
+        border-radius: 99px;
+        font-size: 14px;
+        font-weight: 500;
+        color: var(--text-muted);
+        box-shadow: var(--shadow-sm);
+        transition: all 0.2s ease;
+        cursor: default;
+      }
+
+      .skill:hover {
+        border-color: var(--primary);
+        color: var(--primary);
+        transform: translateY(-2px);
+        box-shadow: var(--shadow-md);
+      }
+
+      /* ---------- ABOUT ---------- */
+
+      .about {
+        background: var(--card);
+        border: 1px solid var(--border);
+        padding: 40px;
+        border-radius: 24px;
+        color: var(--text-muted);
+        font-size: 17px;
+        box-shadow: var(--shadow-sm);
+        line-height: 1.8;
+      }
+
+      /* ---------- FEATURED PROJECTS (Large) ---------- */
+
+      .projects {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+        gap: 32px;
+      }
+
+      .project {
+        background: var(--card);
+        border: 1px solid var(--border);
+        border-radius: 24px;
+        overflow: hidden;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+      }
+
+      .project:hover {
+        transform: translateY(-8px);
+        box-shadow: var(--shadow-lg);
+        border-color: #cbd5e1;
+      }
+
+      .project img {
+        width: 100%;
+        height: 200px;
+        object-fit: cover;
+        border-bottom: 1px solid var(--border);
+      }
+
+      .project-content {
+        padding: 28px;
+        flex-grow: 1;
+        display: flex;
+        flex-direction: column;
+      }
+
+      .project h3 {
+        margin: 0 0 4px;
+        font-size: 22px;
+        font-weight: 700;
+        color: var(--text-main);
+      }
+
+      .project .role {
+        font-size: 13px;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        color: var(--primary);
+        margin-bottom: 12px;
+      }
+
+      .project p {
+        font-size: 15px;
+        color: var(--text-muted);
+        margin-bottom: 24px;
+        flex-grow: 1;
+      }
+
+      .tech-stack {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin-top: auto;
+      }
+
+      .tech-tag {
+        font-size: 12px;
+        background: #f1f5f9;
+        color: #475569;
+        padding: 4px 10px;
+        border-radius: 6px;
+        font-weight: 500;
+      }
+
+      .project-links {
+        display: flex;
+        gap: 16px;
+        margin-top: 24px;
+        padding-top: 20px;
+        border-top: 1px solid #f1f5f9;
+      }
+
+      .link-item {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        font-size: 14px;
+        font-weight: 600;
+        color: var(--text-main);
+        text-decoration: none;
+        transition: color 0.2s;
+      }
+
+      .link-item:hover {
+        color: var(--primary);
+      }
+
+      .link-item svg {
+        width: 18px;
+        height: 18px;
+        stroke-width: 2px;
+      }
+
+      /* ---------- PLAYGROUND (Small Projects) ---------- */
+
+      .playground-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+        gap: 20px;
+      }
+
+      .playground-card {
+        background: var(--card);
+        border: 1px solid var(--border);
+        border-radius: 16px;
+        padding: 24px;
+        transition: all 0.2s ease;
+        display: flex;
+        flex-direction: column;
+      }
+
+      .playground-card:hover {
+        transform: translateY(-4px);
+        box-shadow: var(--shadow-md);
+        border-color: var(--primary);
+      }
+
+      .playground-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        margin-bottom: 12px;
+      }
+
+      .folder-icon {
+        color: var(--primary);
+        width: 24px;
+        height: 24px;
+      }
+
+      .playground-links {
+        display: flex;
+        gap: 12px;
+      }
+
+      .playground-links a {
+        color: var(--text-muted);
+        transition: color 0.2s;
+      }
+
+      .playground-links a:hover {
+        color: var(--primary);
+      }
+
+      .playground-card h3 {
+        font-size: 18px;
+        font-weight: 700;
+        margin: 0 0 8px 0;
+        color: var(--text-main);
+      }
+
+      .playground-card p {
+        font-size: 14px;
+        color: var(--text-muted);
+        margin: 0 0 16px 0;
+        flex-grow: 1;
+        line-height: 1.5;
+      }
+
+      .playground-tech {
+        font-size: 12px;
+        font-family: monospace;
+        color: var(--text-muted);
+        display: flex;
+        gap: 12px;
+      }
+
+      /* ---------- CTA ---------- */
+
+      .cta {
+        text-align: center;
+        padding: 64px 24px;
+        background: white;
+        border: 1px solid var(--border);
+        border-radius: 24px;
+        box-shadow: var(--shadow-lg);
+        position: relative;
+        overflow: hidden;
+      }
+
+      .cta::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 4px;
+        background: linear-gradient(90deg, #38bdf8, #60a5fa, #2563eb);
+      }
+
+      .cta h2 {
+        margin-bottom: 16px;
+        font-size: 32px;
+      }
+
+      .cta p {
+        color: var(--text-muted);
+        margin-bottom: 32px;
+        font-size: 18px;
+      }
+
+      .btn {
+        display: inline-flex;
+        align-items: center;
+        padding: 16px 32px;
+        border-radius: 999px;
+        background: var(--text-main);
+        color: white;
+        text-decoration: none;
+        font-weight: 600;
+        transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s;
+      }
+
+      .btn:hover {
+        background: var(--primary);
+        transform: translateY(-2px);
+        box-shadow: 0 10px 20px -5px rgba(37, 99, 235, 0.4);
+      }
+
+      footer {
+        text-align: center;
+        color: #94a3b8;
+        font-size: 14px;
+        margin-top: 80px;
+        padding-bottom: 40px;
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      /* ---------- MOBILE RESPONSIVENESS ---------- */
+
+      @media (max-width: 768px) {
+        .container {
+          padding: 48px 20px;
+        }
+
+        .hero {
+          margin-bottom: 64px;
+        }
+
+        h1 {
+          font-size: 36px;
+        }
+
+        .summary {
+          font-size: 16px;
+        }
+
+        .about {
+          padding: 24px;
+          font-size: 16px;
+        }
+
+        .projects {
+          grid-template-columns: 1fr;
+          gap: 24px;
+        }
+
+        .project img {
+          height: 180px;
+        }
+
+        /* Make playground grid 1 column on mobile for better readability */
+        .playground-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .cta {
+          padding: 40px 20px;
+        }
+
+        .cta h2 {
+          font-size: 24px;
+        }
+      }
+    </style>
   </head>
   <body>
-    <div class="page-header">
-      <div class="container">
-        <div class="photo-container">
-          <img src="./profile.jpeg" alt="personal pic" />
-        </div>
-        <h3 class="title">Tarekul Islam</h3>
-        <p class="category">Full Stack Developer | React, Node.js, Firebase.</p>
+    <div class="container">
+      <div class="hero">
+        <img class="avatar" src="./profile.jpeg" alt="Profile of Tarekul" />
+        <h1>Tarekul Islam</h1>
+        <div class="title">Full Stack Engineer</div>
+        <p class="summary">
+          Building production-ready systems with a focus on reliability,
+          clarity, and user experience. I bridge the gap between complex
+          backends and polished interfaces.
+        </p>
       </div>
-    </div>
 
-    <div class="section">
-      <div class="button-container">
-        <button class="btn-round btn-icon btn btn-default btn-lg">
-          <a
-            href="https://www.linkedin.com/in/tarek-islam-4b880091/"
-            target="blank"
-            ><img src="https://img.icons8.com/fluent/48/000000/linkedin.png"
-          /></a>
-        </button>
-        <button class="btn-round btn-icon btn btn-default btn-lg">
-          <a href="https://github.com/tarekul" target="blank"
-            ><img src="https://img.icons8.com/fluent/48/000000/github.png"
-          /></a>
-        </button>
-      </div>
-      <div class="section fade-in-section">
+      <section>
+        <h2 style="justify-content: center">Core Technologies</h2>
+        <div class="skills">
+          <div class="skill" style="border-color: #3b82f6; color: #1d4ed8">
+            Python
+          </div>
+          <div class="skill" style="border-color: #f59e0b; color: #b45309">
+            JavaScript (ES6+)
+          </div>
+          <div class="skill">React & Vite</div>
+          <div class="skill">Tailwind CSS</div>
+          <div class="skill">FastAPI</div>
+          <div class="skill">Node.js</div>
+          <div class="skill">PostgreSQL</div>
+          <div class="skill">Pandas & NumPy</div>
+          <div class="skill">AWS</div>
+          <div class="skill">System Design</div>
+        </div>
+      </section>
+
+      <section>
+        <h2>About Me</h2>
         <div class="about">
-          <img class="skill-block" src="./skillBlock.png" alt="personal pic" />
-          <div class="about-text">
-            <h5 class="description">
-              Hi! I’m Tarekul, a full stack developer building smooth front-end
-              experiences and reliable back-end APIs.
-            </h5>
-            <p class="highlights"><span>🌍</span>Based in New York City</p>
-            <p class="highlights">
-              <span>💻</span>Skilled in React, Node.js, Firebase
-            </p>
-            <p class="highlights">
-              <span>🚀</span>Passionate about creating time-saving apps
-            </p>
-          </div>
+          <p style="margin: 0">
+            I am a software engineer focused on building data-driven
+            applications. My expertise lies in the intersection of modern web
+            development and data analysis. I build systems that don't just store
+            data, but make it useful. From designing efficient schemas to
+            deploying scalable APIs, I focus on clarity, reliability, and
+            thoughtful UX.
+          </p>
         </div>
-      </div>
-      <div class="section fade-in-section">
-        <div class="portfolio">
-          <h3 class="title">Projects I am proud of</h3>
-          <div class="grid-container">
-            <div class="box">
-              <div class="box-image">
-                <img src="./assets/GroceryGo.png" alt="" />
-              </div>
-              <p>Local Grocery Delivery</p>
+      </section>
+
+      <section>
+        <h2>Featured Work</h2>
+        <div class="projects">
+          <article class="project">
+            <img
+              src="./assets/correlate.png"
+              alt="Correlate Dashboard Interface"
+              loading="lazy"
+            />
+            <div class="project-content">
+              <h3>Correlate</h3>
+              <div class="role">Founder / Lead Engineer</div>
               <p>
-                Empowering local grocers with digital solutions. Connecting
-                customers to their favorite stores through seamless delivery.
+                A data-driven analytics platform that helps users discover
+                correlations between their daily habits, productivity, and mood.
+                Features include statistical impact analysis, tag tracking, and
+                visualization dashboards.
               </p>
-              <p class="stack">
-                <i class="devicon-react-original colored"></i>
-                <i class="devicon-nodejs-plain colored"></i>
-                <i class="devicon-express-original colored"></i>
-                <i class="devicon-firebase-plain colored"></i>
-              </p>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="section fade-in-section">
-        <div class="playground">
-          <h3 class="title">Playground</h3>
-          <div class="grid-container">
-            <div class="box">
-              <div class="box-image">
-                <img src="./assets/PriorityList.png" alt="" />
+
+              <div class="tech-stack">
+                <span class="tech-tag">React</span>
+                <span class="tech-tag">FastAPI</span>
+                <span class="tech-tag">Pandas</span>
+                <span class="tech-tag">PostgreSQL</span>
               </div>
-              <p>Priority List</p>
+
+              <div class="project-links">
+                <a
+                  href="https://correlated.netlify.app"
+                  target="_blank"
+                  class="link-item"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25"
+                    />
+                  </svg>
+                  Live Demo
+                </a>
+
+                <a
+                  href="https://github.com/tarekul/Correlate"
+                  target="_blank"
+                  class="link-item"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      d="M17.25 6.75L22.5 12l-5.25 5.25m-10.5 0L1.5 12l5.25-5.25m7.5-3l-4.5 16.5"
+                    />
+                  </svg>
+                  Source Code
+                </a>
+              </div>
+            </div>
+          </article>
+
+          <article class="project">
+            <img
+              src="./assets/grocerygo.png"
+              alt="Grocery Go Application"
+              loading="lazy"
+            />
+            <div class="project-content">
+              <h3>Grocery Go</h3>
+              <div class="role">Full Stack Engineer</div>
               <p>
-                A simple to-do list app that helps users prioritize their tasks.
+                A hyperlocal grocery delivery platform featuring real-time order
+                updates, shopper workflow optimization, and inventory
+                management.
               </p>
-              <p class="stack">
-                <i class="devicon-html5-plain colored"></i>
-                <i class="devicon-css3-plain colored"></i>
-                <i class="devicon-javascript-plain colored"></i>
-              </p>
-            </div>
-            <div class="box">
-              <div class="box-image">
-                <img src="./assets/UnsecureLogin.png" alt="" />
+
+              <div class="tech-stack">
+                <span class="tech-tag">React</span>
+                <span class="tech-tag">Node.js</span>
+                <span class="tech-tag">Firebase</span>
+                <span class="tech-tag">Stripe</span>
               </div>
-              <p>Unsecure login demo</p>
-              <p>A simple login that shows how unsecure login can be.</p>
-              <p class="stack">
-                <i class="devicon-html5-plain colored"></i>
-                <i class="devicon-css3-plain colored"></i>
-                <i class="devicon-javascript-plain colored"></i>
-              </p>
-            </div>
-            <div class="box">
-              <div class="box-image">
-                <img src="./assets/FairPayChecker.png" alt="" />
+
+              <div class="project-links">
+                <a
+                  href="https://local-grocery-delivery.netlify.app"
+                  target="_blank"
+                  class="link-item"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25"
+                    />
+                  </svg>
+                  Live Demo
+                </a>
+                <a
+                  href="https://github.com/tarekul/Grocery-Delivery"
+                  target="_blank"
+                  class="link-item"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      d="M17.25 6.75L22.5 12l-5.25 5.25m-10.5 0L1.5 12l5.25-5.25m7.5-3l-4.5 16.5"
+                    />
+                  </svg>
+                  Source Code
+                </a>
               </div>
-              <p>FairPay Checker</p>
-              <p>Instantly check if your pay is fair</p>
-              <p class="stack">
-                <i class="devicon-html5-plain colored"></i>
-                <i class="devicon-css3-plain colored"></i>
-                <i class="devicon-javascript-plain colored"></i>
-                <i class="devicon-python-plain colored"></i>
-                <i class="devicon-flask-original colored"></i>
-              </p>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section>
+        <h2>The Playground</h2>
+        <div class="playground-grid">
+          <div class="playground-card">
+            <div class="playground-header">
+              <svg
+                class="folder-icon"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z"
+                />
+              </svg>
+              <div class="playground-links">
+                <a
+                  href="https://github.com/tarekul/Wage-Overtime-Checker-FE"
+                  target="_blank"
+                  aria-label="Github Link"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="20"
+                    height="20"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <path
+                      d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"
+                    ></path>
+                  </svg>
+                </a>
+              </div>
+            </div>
+            <h3>FairPay Checker</h3>
+            <p>
+              An overtime and wage calculator that helps workers detect
+              underpayment and reclaim lost wages based on their state's labor
+              laws.
+            </p>
+            <div class="playground-tech">JavaScript · Flask</div>
+          </div>
+
+          <div class="playground-card">
+            <div class="playground-header">
+              <svg
+                class="folder-icon"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z"
+                />
+              </svg>
+              <div class="playground-links">
+                <a
+                  href="https://github.com/tarekul/Grocery-Go-Shopper"
+                  target="_blank"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="20"
+                    height="20"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <path
+                      d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"
+                    ></path>
+                  </svg>
+                </a>
+              </div>
+            </div>
+            <h3>Grocery Go Shopper</h3>
+            <p>
+              Grocery Go companion app for shoppers to receive, pick up, and
+              deliver orders
+            </p>
+            <div class="playground-tech">Dart</div>
+          </div>
+
+          <div class="playground-card">
+            <div class="playground-header">
+              <svg
+                class="folder-icon"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z"
+                />
+              </svg>
+              <div class="playground-links">
+                <a
+                  href="https://github.com/tarekul/PriorityQueue"
+                  target="_blank"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="20"
+                    height="20"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <path
+                      d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"
+                    ></path>
+                  </svg>
+                </a>
+              </div>
+            </div>
+            <h3>Priority Queue</h3>
+            <p>
+              A responsive task manager built with vanilla JavaScript that
+              utilizes a custom Min-Heap data structure for efficient O(logn)
+              priority sorting.
+            </p>
+            <div class="playground-tech">
+              JavaScript, CSS3, HTML5, LocalStorage
             </div>
           </div>
         </div>
+      </section>
+
+      <div class="cta">
+        <h2>Let’s build something great</h2>
+        <p>
+          Currently open to full-time roles and interesting freelance
+          collaborations.
+        </p>
+        <a href="mailto:rahin6810@gmail.com" class="btn">Get in touch</a>
       </div>
+
+      <footer>© 2026 Tarekul Islam. Built with HTML & CSS.</footer>
     </div>
   </body>
-  <script>
-    const faders = document.querySelectorAll(".fade-in-section");
-
-    const options = {
-      threshold: 0.2,
-    };
-
-    const appearOnScroll = new IntersectionObserver((entries, observer) => {
-      entries.forEach((entry) => {
-        if (!entry.isIntersecting) {
-          return;
-        } else {
-          entry.target.classList.add("visible");
-          observer.unobserve(entry.target);
-        }
-      });
-    }, options);
-
-    faders.forEach((fader) => {
-      appearOnScroll.observe(fader);
-    });
-  </script>
 </html>
